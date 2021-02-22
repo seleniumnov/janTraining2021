@@ -11,7 +11,6 @@ public class HomePage extends GenericMethods {
 
 	/*
 	 * WebElement ele = driver.findElement(By.xpath(""));
-	 
 	 * Page Object Model using PageFactory
 	 */
 
