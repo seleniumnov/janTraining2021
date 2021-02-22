@@ -51,7 +51,6 @@ public class WebDriverInitiation {
 			Assert.fail("Please pass valid browser name " + browserName);
 			break;
 		}
-
 	}
 
 	public static void initiateApplication() {
