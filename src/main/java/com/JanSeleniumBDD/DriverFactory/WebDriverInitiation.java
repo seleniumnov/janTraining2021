@@ -46,6 +46,11 @@ public class WebDriverInitiation {
 			WebDriverManager.iedriver().setup();
 			driver = new InternetExplorerDriver();
 			break;
+		
+		case "edge":
+			WebDriverManager.edgedriver().setup();
+			driver = new InternetExplorerDriver();
+			break;	
 
 		default:
 			Assert.fail("Please pass valid browser name " + browserName);
