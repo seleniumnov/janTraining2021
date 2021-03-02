@@ -1,11 +1,15 @@
 package com.JanSeleniumBDD.pageObjects;
 
+import java.util.Map;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import com.JanSeleniumBDD.utilities.GenericMethods;
+import com.JanSeleniumBDD.utilities.ReadTestData;
 
 public class HomePage extends GenericMethods {
 
@@ -13,6 +17,8 @@ public class HomePage extends GenericMethods {
 	 * WebElement ele = driver.findElement(By.xpath(""));
 	 * Page Object Model using PageFactory
 	 */
+	
+	public static Map<String, String> data = ReadTestData.readDataFromExcel("FormFilling");
 
 	public HomePage() {
 		PageFactory.initElements(driver, this);
@@ -46,9 +52,9 @@ public class HomePage extends GenericMethods {
 	public WebElement timingpreference;
 
 	public void formFilling() {
-		input(name, "Selenium189@gmail.com");
-		input(phone, "996688");
-		input(nameofcollege, "Bapatla");
+		input(name, data.get("Email"));
+		input(phone, data.get("Phone"));
+		input(nameofcollege, data.get("College"));
 		input(graduation, "2011");
 		selectByText(aboutus, "Quora");
 		selectByText(codinglanguage, "C++");

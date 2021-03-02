@@ -3,6 +3,7 @@ package com.JanSeleniumBDD.steps;
 import com.JanSeleniumBDD.pageObjects.HomePage;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 public class BeingZero {
@@ -24,6 +25,12 @@ public class BeingZero {
 	@And("i select my timing preference")
 	public void i_select_my_timing_preference() {
 		homepage.selecttimeingPreference();
+	}
+	
+	@Given("fill all the details in the form")
+	public void formfill() {
+		
+		homepage.formFilling();
 	}
 
 }

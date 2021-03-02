@@ -15,92 +15,69 @@ public class ReadTestData {
 
 	public static String value = null;
 
-	public static void main(String[] args) throws Exception {
+	public static String key = null;
 
-		//readDataFromExcel();
-
-		/*
-		 * String num = "9966";
-		 * 
-		 * int v = Integer.parseInt(num);
-		 * 
-		 * System.out.println(v);
-		 * 
-		 * int u = 9955;
-		 * 
-		 * String s = String.valueOf(u);
-		 * 
-		 * System.out.println(s);
-		 * 
-		 */
-		Map<String, String> map = new HashMap<String,String>();
-		
-		
-		map.put("Name", "Suresh");
-		
-		map.put("Course", "Selenium");
-		
-		map.put("City", "Hyderabad");
-		
-		map.put("5", "Vijayawada");
-		
-		System.out.println(map);
-		
-		System.out.println(map.get("5"));
-		
-		System.out.println(map.get("Name"));
-		
-		map.put("Email", "Selenium189@gmail.com");
-		
-		
-		map.put("About_US", "Quora");
-		
-		
-		map.get("Email");
-		
-		
+	public static Map<String, String> map = null;
+	
+	public static void main(String[] args) {
+		readDataFromExcel("FB");
 	}
 
-	public static void readDataFromExcel() throws Exception {
+	public static Map<String, String> readDataFromExcel(String tcName) {
+		try {
 
-		File file = new File("E:\\BrowserDriver\\Test.xlsx");
+			File file = new File("E:\\BrowserDriver\\Test.xlsx");
 
-		FileInputStream fin = new FileInputStream(file);
+			FileInputStream fin = new FileInputStream(file);
 
-		XSSFWorkbook wb = new XSSFWorkbook(fin);
+			XSSFWorkbook wb = new XSSFWorkbook(fin);
 
-		XSSFSheet sh = wb.getSheet("Data");
+			XSSFSheet sh = wb.getSheet("Data");
 
-		int rows = sh.getLastRowNum() - sh.getFirstRowNum();
+			int rows = sh.getLastRowNum() - sh.getFirstRowNum();
 
-		int cols = sh.getRow(0).getLastCellNum();
+			int cols = sh.getRow(0).getLastCellNum();
 
-		for (int i = 1; i <= rows; i++) {
+			map = new HashMap<String, String>();
 
-			testCaseName = sh.getRow(i).getCell(0).getStringCellValue();
+			for (int i = 1; i <= rows; i++) {
 
-			for (int j = 1; j < cols; j++) {
+				testCaseName = sh.getRow(i).getCell(0).getStringCellValue();
 
-				if (sh.getRow(i).getCell(j).getCellType() == CellType.STRING) {
+				if (testCaseName.equals(tcName)) {
 
-					value = sh.getRow(i).getCell(j).getStringCellValue();
+					for (int j = 1; j < cols; j++) {
 
-				} else if (sh.getRow(i).getCell(j).getCellType() == CellType.NUMERIC) {
+						key = sh.getRow(0).getCell(j).getStringCellValue();
 
-					value = String.valueOf((int) sh.getRow(i).getCell(j).getNumericCellValue());
-				} else {
+						if (!sh.getRow(i).getCell(j).getCellType().equals("BLANK")) {
 
-					value = sh.getRow(i).getCell(j).getRawValue();
+							if (sh.getRow(i).getCell(j).getCellType() == CellType.STRING) {
+
+								value = sh.getRow(i).getCell(j).getStringCellValue();
+
+							} else if (sh.getRow(i).getCell(j).getCellType() == CellType.NUMERIC) {
+
+								value = String.valueOf((int) sh.getRow(i).getCell(j).getNumericCellValue());
+							} else {
+
+								value = sh.getRow(i).getCell(j).getRawValue();
+							}
+						}
+						map.put(key, value);
+					}
 				}
-
 			}
+			wb.close();
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			
+			e.printStackTrace();
 		}
 
-		System.out.println(testCaseName);
-
-		System.out.println(value);
-
-		wb.close();
-
+		return map;
 	}
+
 }

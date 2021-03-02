@@ -22,6 +22,6 @@ Feature: Cart Module Test Cases
 
  	@formfilling
   Scenario: Fill all detail Being Zero application
-    And enter your personal email address
-    When i enter my college name
-    And i select my timing preference
+    Given fill all the details in the form
+    #When i enter my college name
+    #And i select my timing preference
